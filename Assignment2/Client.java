@@ -16,10 +16,10 @@ public class Client implements Runnable{
 	private List<Exercise> routine;
 
 	public Client(int id){
-
+		this.id = id;
 	}
 	public void addExercise(Exercise e){
-
+		
 	}
 	public static Client generateRandom(int id){
 		return new Client(id);
