@@ -10,5 +10,8 @@ package Assignment2;
  */
 
 public class ApparatusType {
-
+	public enum ApparatusType { LEGPRESSMACHINE , BARBELL , HACKSQUATMACHINE , LEGEXTENSIONMACHINE ,
+	 							LEGCURLMACHINE , LATPULLDOWNMACHINE , PECDECKMACHINE ,
+	 							CABLECROSSOVERMACHINE
+	 }
 }
