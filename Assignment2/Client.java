@@ -1,5 +1,7 @@
 package Assignment2;
 
+import java.util.*;
+
 /**
  * @author      Mark Knapp
  * @author      Zach Hackett
@@ -9,6 +11,21 @@ package Assignment2;
  * "I pledge my honor that I have abided by the Stevens Honor System"
  */
 
-public class Client {
+public class Client implements Runnable{
+	private int id;
+	private List<Exercise> routine;
 
+	public Client(int id){
+
+	}
+	public void addExercise(Exercise e){
+
+	}
+	public static Client generateRandom(int id){
+		return new Client(id);
+	}
+
+	public void run(){
+
+	}
 }
