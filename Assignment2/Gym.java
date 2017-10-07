@@ -19,6 +19,8 @@ public class Gym implements Runnable{
 	private Set<Integer> clients; // for generating fresh client ids
 	private ExecutorService executor;
 	// various semaphores - declaration omitted
+	public Semaphore[] accessApparatus 	= new Semaphore[8];
+	public Semaphore[] getWeights		= new Semaphore[3];
 
 	public Gym(){
 		noOfWeightPlates = new HashMap<WeightPlateSizes, Integer>();
@@ -27,6 +29,13 @@ public class Gym implements Runnable{
 		noOfWeightPlates.put(WeightPlateSizes.LARGE_10KG, 75);
 
 		executor = Executors.newFixedThreadPool(GYM_SIZE);
+
+		for (int i = 0; i < 8; i++){
+			accessApparatus[i] = new Semaphore(5);
+		}
+		getWeights[0] = new Semaphore(110);
+		getWeights[1] = new Semaphore(90);
+		getWeights[2] = new Semaphore(75);
 	}
 
 	public void run(){
