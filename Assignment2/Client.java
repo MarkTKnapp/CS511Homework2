@@ -2,6 +2,7 @@ package Assignment2;
 
 import java.util.*;
 import Assignment2.Gym.*;
+import Assignment2.WeightPlateSize.*;
 
 /**
  * @author      Mark Knapp
@@ -37,10 +38,56 @@ public class Client implements Runnable{
 		return returnClient;
 	}
 
-	public void run(){
+	public void run() {
 		for(Exercise e: routine){
 			System.out.println("Client " + id + " is doing exercise " + e.getApparatusTypeString());
-			
+
+			// Begin entry protocol
+			try {
+				Gym.accessApparatus[e.getApparatusTypeIndex()].acquire();
+			} catch( InterruptedException ie){
+
+			}
+
+			int weights_3KG = e.getWeights().get(WeightPlateSizes.SMALL_3KG);
+			int weights_5KG = e.getWeights().get(WeightPlateSizes.MEDIUM_5KG);
+			int weights_10KG = e.getWeights().get(WeightPlateSizes.LARGE_10KG);
+			for (int i = 0; i < weights_3KG; i++){
+				try {
+					Gym.getWeights[0].acquire();
+				} catch( InterruptedException ie){
+
+				}
+			}
+			for (int i = 0; i < weights_5KG; i++){
+				try {
+					Gym.getWeights[1].acquire();
+				} catch( InterruptedException ie){
+
+				}
+			}
+			for (int i = 0; i < weights_10KG; i++){
+				try {
+					Gym.getWeights[2].acquire();
+				} catch( InterruptedException ie){
+
+				}
+			}
+			// End entry protocol
+
+			// Begin exit protocol
+			Gym.accessApparatus[e.getApparatusTypeIndex()].release();
+
+			for (int i = 0; i < weights_3KG; i++){
+				Gym.getWeights[0].release();
+			}
+			for (int i = 0; i < weights_5KG; i++){
+				Gym.getWeights[1].release();
+			}
+			for (int i = 0; i < weights_10KG; i++){
+				Gym.getWeights[2].release();
+			}
+			// End exit protocol
 		}
 	}
 }

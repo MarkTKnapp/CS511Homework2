@@ -15,17 +15,17 @@ import Assignment2.ApparatusType.*;
 
 public class Exercise {
 	private ApparatusTypes at;
-	private Map<WeightPlateSize, Integer> weight;
+	private Map<WeightPlateSizes, Integer> weight;
 	private int duration;
 	public static Random rand = new Random();
 
-	public Exercise(ApparatusTypes at, Map<WeightPlateSize, Integer> weight, int duration){
+	public Exercise(ApparatusTypes at, Map<WeightPlateSizes, Integer> weight, int duration){
 		this.at 		= at;
 		this.weight 	= weight;
 		this.duration 	= duration;
 	}
 
-	public static Exercise generateRandom(Map<WeightPlateSize, Integer> weight){
+	public static Exercise generateRandom(Map<WeightPlateSizes, Integer> weight){
 		Map<WeightPlateSizes, Integer> selectedWeights = new HashMap<WeightPlateSizes, Integer>();
 
 		int rand1 	 = (int)(rand.nextDouble() * 10);
@@ -41,7 +41,15 @@ public class Exercise {
 		selectedWeights.put(WeightPlateSizes.MEDIUM_5KG, rand2);
 		selectedWeights.put(WeightPlateSizes.LARGE_10KG, rand3);
 		
-		return new Exercise(ApparatusTypes.values()[(rand.nextInt() & 0x07)], weight, duration);
+		return new Exercise(ApparatusTypes.values()[(rand.nextInt() & 0x07)], selectedWeights, duration);
+	}
+
+	public Map<WeightPlateSizes, Integer> getWeights(){
+		return weight;
+	}
+
+	public ApparatusTypes getApparatus(){
+		return at;
 	}
 
 	public String getApparatusTypeString(){
@@ -64,6 +72,28 @@ public class Exercise {
 				return "Cable Crossover Machine";
 		}
 		return "None";
+	}
+
+	public int getApparatusTypeIndex(){
+		switch (at){
+			case LEGPRESSMACHINE:
+				return 0;
+			case BARBELL:
+				return 1;
+			case HACKSQUATMACHINE:
+				return 2;
+			case LEGEXTENSIONMACHINE:
+				return 3;
+			case LEGCURLMACHINE:
+				return 4;
+			case LATPULLDOWNMACHINE:
+				return 5;
+			case PECDECKMACHINE:
+				return 6;
+			case CABLECROSSOVERMACHINE:
+				return 7;
+		}
+		return -1;
 	}
 
 }

@@ -19,8 +19,8 @@ public class Gym implements Runnable{
 	private Set<Integer> clients; // for generating fresh client ids
 	private ExecutorService executor;
 	// various semaphores - declaration omitted
-	public Semaphore[] accessApparatus 	= new Semaphore[8];
-	public Semaphore[] getWeights		= new Semaphore[3];
+	public static Semaphore[] accessApparatus 	= new Semaphore[8];
+	public static Semaphore[] getWeights		= new Semaphore[3];
 
 	public Gym(){
 		noOfWeightPlates = new HashMap<WeightPlateSizes, Integer>();
